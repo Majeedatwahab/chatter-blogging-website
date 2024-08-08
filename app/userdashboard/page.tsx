@@ -328,7 +328,7 @@ const UserDashboard = () => {
                   {postAnalytics.map((blog) => (
                     <div
                       key={blog.id}
-                      className="bg-gray-100 p-4 rounded-md shadow-md hover:bg-emerald-400 hover:text-white"
+                      className="bg-gray-100 p-4 rounded-md shadow-md hover:bg-emerald-600 hover:text-white"
                     >
                       <h3 className="text-lg font-bold mb-2">{blog.title}</h3>
                       <div className="grid grid-cols-2 gap-4 mb-4 ">

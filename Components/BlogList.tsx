@@ -221,6 +221,7 @@ const BlogList = () => {
       <div className="flex justify-center gap-4 flex-wrap my-10">
         {[
           "All",
+          "Uncategorized",
           "Technology",
           "Food",
           "Nature",

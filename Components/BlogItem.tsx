@@ -43,8 +43,6 @@ const BlogItem: React.FC<BlogItemProps> = ({
   onEdit,
   onDelete,
 }) => {
-  // Local state to handle comment input
-
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="relative w-full" style={{ paddingTop: "56.25%" }}>

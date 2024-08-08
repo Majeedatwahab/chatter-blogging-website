@@ -239,6 +239,7 @@ const EditBlog = () => {
             <option value="Health and wellness">Health and Wellness</option>
             <option value="Nature">Nature</option>
             <option value="Food">Food</option>
+            <option value="Others">Food</option>
           </select>
           <input type="file" onChange={handleImageChange} accept="image/*" />
           <input type="file" onChange={handleVideoChange} accept="video/*" />
@@ -261,7 +262,7 @@ const EditBlog = () => {
 
           <button
             type="submit"
-            className="bg-emerald-900 text-white rounded py-2 px-4 hover:bg-blue-600"
+            className="bg-emerald-900 text-white rounded py-2 px-4 hover:bg-emerald-600"
           >
             Update Post
           </button>

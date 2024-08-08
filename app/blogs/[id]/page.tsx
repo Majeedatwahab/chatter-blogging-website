@@ -20,6 +20,7 @@ import Header from "@/Components/Header";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
 import MarkdownRenderer from "@/Components/MarkdownRenderer";
+import { FiShare2 } from "react-icons/fi";
 
 const parseDate = (date: any) => {
   if (date && date.seconds) {
@@ -277,6 +278,27 @@ const Page = ({ params }: { params: PageParams }) => {
     }
   };
 
+  const handleShare = async () => {
+    if (navigator.share && data) {
+      try {
+        await navigator.share({
+          title: data.title,
+          text: "Check out this blog post on Chatter!",
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.error("Error sharing post:", error);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Link copied to clipboard!");
+      } catch (error) {
+        console.error("Error copying link to clipboard:", error);
+      }
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (!data) return <div>No blog data available</div>;
@@ -337,6 +359,9 @@ const Page = ({ params }: { params: PageParams }) => {
                   )}
                 </button>
                 <span>{data.bookmarks?.length || 0}</span>
+                <button onClick={handleShare} className="flex items-center">
+                  <FiShare2 className="" size={24} />
+                </button>
               </div>
             </div>
             <div className="relative w-full h-60 sm:h-96 mb-10 rounded-md overflow-hidden shadow-lg">
