@@ -10,10 +10,11 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "My Chatter App",
-  description: "A platform where you can elevate your voice and engage with content that matters.",
-  keywords: "Chatter, blogging, content, community",
-
+    title: "Chatter App | Elevate Your Voice & Connect with Like-Minded People",
+    description: "Join Chatter, the ultimate blogging platform to share your voice, connect with a vibrant community, and engage with impactful content. Discover, create, and inspire.",
+    keywords: "Chatter, blogging platform, content creation, online community, social engagement, voice your opinion, inspire, connect",
+ 
+  
 };
 
 export default function RootLayout({
@@ -23,7 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <Header /> 
+        {children}
+      </body>
     </html>
   );
 }
