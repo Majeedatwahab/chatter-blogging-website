@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchBookmarkedPosts } from "@/app/Services/postService";
 import BlogItem from "./BlogItem";
 import Link from "next/link";
+import Pagination from "./Pagination";
 
 type Post = {
   id: string;
@@ -38,16 +39,13 @@ const BookmarkedPosts: React.FC<BookmarkedPostsProps> = ({ currentUserId }) => {
     loadBookmarkedPosts();
   }, [currentUserId]);
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = bookmarkedPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(bookmarkedPosts.length / postsPerPage);
 
-  const currentPosts = bookmarkedPosts.slice(
-    (currentPage - 1) * postsPerPage,
-    currentPage * postsPerPage
-  );
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
   return (
     <>
       <header className="bg-white shadow-md">
@@ -82,22 +80,12 @@ const BookmarkedPosts: React.FC<BookmarkedPostsProps> = ({ currentUserId }) => {
                 />
               ))}
             </div>
-            {/* Pagination Controls */}
-            <div className="flex justify-center mt-8">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={`px-4 py-2 mx-1 border rounded-md ${
-                    currentPage === index + 1
-                      ? "bg-emerald-900 text-white"
-                      : "bg-white text-emerald-900 border-emerald-900"
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
+            <Pagination
+              postsPerPage={postsPerPage}
+              totalPosts={bookmarkedPosts.length}
+              currentPage={currentPage}
+              paginate={paginate}
+            />
           </>
         ) : (
           <p className="text-center text-gray-500">

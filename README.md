@@ -104,7 +104,7 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-measurement-id
 
 
 ## Usage
-1. Creating a Blog Post: After signing in, navigate to the 'Create Post' page. You can write your content using Markdown, upload images, and categorize your post before publishing.
+1. Creating a Blog Post: After signing in, navigate to the 'Write' page. You can write your content using Markdown, upload images, and categorize your post before publishing.
 
 2. Interacting with Posts: Browse through posts, and like, bookmark, comment, or share content that interests you.
 
@@ -141,28 +141,34 @@ I welcome contributions to Chatter! Here's how you can help:
 1. Fork the repository on GitHub.
 
 2. Clone your fork:
-  ```bash 
+```bash 
   git clone https://github.com/your-username/chatter.git
+```
 
 3. Create a branch for your feature:
-  ```bash
-  git checkout -b feature-branch
+```bash
+   git checkout -b feature-branch
+   ```
 
 4. Make your changes and commit them:
-   ```bash
-   git commit -m "Description of your changes"
+
+```bash 
+    git commit -m "Description of your changes"
+```
 
 5. Push your changes to your fork: 
-   ```bash 
-   git push origin feature-branch
+```bash
+ git push origin feature-branch
+ ```
 
-6. Create a pull request on GitHub.
+ 6.  Create a pull request on GitHub: 
+
 
 
 ## License
  MIT License
 
-Copyright (c) [2024] [Majeedat wahab]
+Copyright (c) [2024] [Majeedat Abdulwahab]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -181,3 +187,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
