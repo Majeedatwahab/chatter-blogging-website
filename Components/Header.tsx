@@ -162,10 +162,19 @@ const Header = () => {
                         >
                           My Posts
                         </Link>
-                        <Link href="/login">
+                        <Link
+                          href="/bookmarks"
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
+                          My Bookmarks
+                        </Link>
+
+                        <Link
+                          href="/login"
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
                           <button
                             onClick={handleLogout}
-                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                             data-testid="logout-button"
                           >
                             Logout

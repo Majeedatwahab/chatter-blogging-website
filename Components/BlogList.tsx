@@ -8,7 +8,7 @@ import {
   arrayRemove,
   getDocs,
 } from "firebase/firestore";
-import { db, auth } from "../app/firebaseConfig"; // Ensure this path is correct
+import { db, auth } from "../app/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import BlogItem from "./BlogItem";
 import Pagination from "./Pagination";
@@ -127,33 +127,6 @@ const BlogList = () => {
       } catch (error) {
         console.error("Error updating likes:", error);
       }
-    }
-  };
-
-  const handleComment = async (id: string, commentText: string) => {
-    if (!currentUserId || !commentText.trim()) return;
-
-    const postRef = doc(db, "blogs", id);
-    const newComment = { userId: currentUserId, text: commentText };
-
-    try {
-      await updateDoc(postRef, {
-        comments: arrayUnion(newComment),
-      });
-
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post.id === id
-            ? {
-                ...post,
-                comments: [...post.comments, newComment],
-                commentsCount: post.commentsCount + 1,
-              }
-            : post
-        )
-      );
-    } catch (error) {
-      console.error("Error adding comment:", error);
     }
   };
 
