@@ -21,15 +21,15 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
 import MarkdownRenderer from "@/Components/MarkdownRenderer";
 import { FiShare2 } from "react-icons/fi";
-
 const parseDate = (date: any) => {
-  if (date && date.seconds) {
+  if (!date) return new Date();
+  if (date.seconds) {
     return new Date(date.seconds * 1000);
-  } else if (typeof date === "string") {
-    return new Date(date);
-  } else {
-    return new Date();
   }
+  if (date instanceof Date) {
+    return date;
+  }
+  return new Date();
 };
 
 interface BlogData {
@@ -37,7 +37,7 @@ interface BlogData {
   title: string;
   content: string;
   imageURL: string;
-  date: any;
+  date: number;
   author: string;
   category: string;
   likes: string[];
@@ -131,7 +131,7 @@ const Page = ({ params }: { params: PageParams }) => {
             return {
               id: doc.id,
               ...data,
-              date: parseDate(data.date),
+              date: parseDate(data.date.toDate()),
               replies: repliesData,
             };
           })
@@ -216,7 +216,7 @@ const Page = ({ params }: { params: PageParams }) => {
         return {
           id: doc.id,
           ...data,
-          date: parseDate(data.date),
+          date: parseDate(data.date.toDate()),
           replies: repliesData,
         };
       })
@@ -327,7 +327,7 @@ const Page = ({ params }: { params: PageParams }) => {
                   className="text-sm mb-3 tracking-tight font-semibold"
                   data-testid="post-date"
                 >
-                  {parseDate(data.date).toLocaleDateString("en-US", {
+                  {new Date(data.date).toLocaleDateString("en-US", {
                     weekday: "long",
                     year: "numeric",
                     month: "long",
