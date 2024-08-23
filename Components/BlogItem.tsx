@@ -57,6 +57,7 @@ const BlogItem: React.FC<BlogItemProps> = ({
           priority
         />
 </div>
+
       <div className="p-6">
         <div className="text-xs text-gray-500">
           {new Date(date).toLocaleDateString("en-US", {

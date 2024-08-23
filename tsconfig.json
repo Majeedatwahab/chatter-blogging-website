@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -18,11 +22,28 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
-    "types": ["cypress", "jest", "node", "@types/jest", "@testing-library/jest-dom"]
-    
+    "types": [
+      "cypress",
+      "jest",
+      "node",
+      "@types/jest",
+      "@testing-library/jest-dom"
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "cypress", "jest.config.ts"],
-  "exclude": ["node_modules", "./cypress.config.ts"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "cypress",
+    "jest.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "./cypress.config.ts"
+  ]
 }

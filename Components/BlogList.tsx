@@ -13,6 +13,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import BlogItem from "./BlogItem";
 import Pagination from "./Pagination";
 
+
 interface BlogPost {
   id: string;
   title: string;
@@ -95,7 +96,7 @@ const BlogList = () => {
     if (!currentUserId) return;
 
     const postRef = doc(db, "blogs", id);
-    const post = posts.find((post) => post.id === id);
+    const post = posts.find((post: { id: string; }) => post.id === id);
 
     if (post) {
       const isLiked = post.likes.includes(currentUserId);
@@ -111,13 +112,13 @@ const BlogList = () => {
           });
         }
 
-        setPosts((prevPosts) =>
+        setPosts((prevPosts: any[]) =>
           prevPosts.map((post) =>
             post.id === id
               ? {
                   ...post,
                   likes: isLiked
-                    ? post.likes.filter((like) => like !== currentUserId)
+                    ? post.likes.filter((like: any) => like !== currentUserId)
                     : [...post.likes, currentUserId],
                   isLiked: !isLiked,
                 }
@@ -133,7 +134,7 @@ const BlogList = () => {
   const handleBookmark = async (id: string) => {
     if (!currentUserId) return;
     const postRef = doc(db, "blogs", id);
-    const post = posts.find((post) => post.id === id);
+    const post = posts.find((post: { id: string; }) => post.id === id);
     if (post) {
       const isBookmarked = post.bookmarks.includes(currentUserId);
       try {
@@ -148,14 +149,14 @@ const BlogList = () => {
             bookmarksCount: post.bookmarksCount + 1,
           });
         }
-        setPosts((prevPosts) =>
+        setPosts((prevPosts: any[]) =>
           prevPosts.map((post) =>
             post.id === id
               ? {
                   ...post,
                   bookmarks: isBookmarked
                     ? post.bookmarks.filter(
-                        (bookmark) => bookmark !== currentUserId
+                        (bookmark: any) => bookmark !== currentUserId
                       )
                     : [...post.bookmarks, currentUserId],
                   isBookmarked: !isBookmarked,
@@ -170,7 +171,7 @@ const BlogList = () => {
   };
 
   const filteredPosts =
-    menu === "All" ? posts : posts.filter((post) => post.category === menu);
+    menu === "All" ? posts : posts.filter((post: { category: any; }) => post.category === menu);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
