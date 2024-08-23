@@ -56,7 +56,7 @@ const BlogItem: React.FC<BlogItemProps> = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
         />
-      </div>
+</div>
       <div className="p-6">
         <div className="text-xs text-gray-500">
           {new Date(date).toLocaleDateString("en-US", {
