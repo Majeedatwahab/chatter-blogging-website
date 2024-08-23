@@ -1,0 +1,50 @@
+
+name: Test
+on:
+   push:
+     branches:
+       - '*'
+   pull_request:
+     branches:
+       - '*'
+defaults:
+   run:
+     working-directory: ./
+jobs:
+   build:
+     runs-on: ubuntu-latest
+     strategy:
+       matrix:
+         node-version: [20]
+     steps:
+       - name: Checkout the Repository
+         uses: actions/checkout@v4
+       - uses: pnpm/action-setup@v4
+         with:
+           version: 9.7.0
+           run_install: |
+             # - recursive: true
+             # args: [--frozen-lockfile, --strict-peer-dependencies]
+       - name: Setup Nodejs
+         uses: actions/setup-node@v4
+         with:
+           node-version: ${{ matrix.node-version }}
+           registry-url: 'https://registry.npmjs.org'
+           cache: 'pnpm'
+       - name: Install dependencies
+         run: |
+           pnpm install
+           pnpm build
+       - name: Install playwright browsers
+         run: |
+           pnpm playwright install chromium --with-deps
+           pnpm playwright install firefox --with-deps
+           pnpm playwright install webkit --with-deps
+           pnpm exec playwright install
+       - name: Run tests
+         run: pnpm test:coverage && pnpm test:e2e
+       - name: Upload coverage reports to Codecov
+         uses: codecov/codecov-action@v4
+         with: 
+            token: ${{ secrets.CODECOV_TOKEN }}
+           

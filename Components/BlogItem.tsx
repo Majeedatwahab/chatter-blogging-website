@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaRegHeart, FaHeart, FaRegComments } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";

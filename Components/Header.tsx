@@ -115,7 +115,7 @@ const Header = () => {
                   <span>Write</span>
                   <IoCreateOutline size={24} />
                 </Link>
-
+                <div className="relative"></div>
                 {user ? (
                   <div className="relative">
                     <button
