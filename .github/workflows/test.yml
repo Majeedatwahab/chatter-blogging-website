@@ -2,24 +2,20 @@ name: Test
 on:
   push:
     branches:
-      - '*'
+      - '*' 
   pull_request:
     branches:
       - '*'
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20]
+        node-version: [20] 
     steps:
       - name: Checkout the Repository
         uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.7.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -62,3 +58,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      # Optional step for debugging environment variables
+      - name: Print Environment Variables
+        run: printenv | grep NEXT_PUBLIC_FIREBASE
