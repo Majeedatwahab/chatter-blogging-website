@@ -33,7 +33,7 @@ jobs:
        - name: Install dependencies
          run: |
            npm install
-           npm build
+           npm run build
        - name: Install playwright browsers
          run: |
            npm playwright install chromium --with-deps
