@@ -1,48 +1,56 @@
 name: Test
 on:
-   push:
-     branches:
-       - '*'
-   pull_request:
-     branches:
-       - '*'
-defaults:
-   run:
-     working-directory: ./
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
 jobs:
-   build:
-     runs-on: ubuntu-latest
-     strategy:
-       matrix:
-         node-version: [20]
-     steps:
-       - name: Checkout the Repository
-         uses: actions/checkout@v4
-       - uses: pnpm/action-setup@v4
-         with:
-           version: 9.7.0
-           run_install: |
-             # - recursive: true
-             # args: [--frozen-lockfile, --strict-peer-dependencies]
-       - name: Setup Nodejs
-         uses: actions/setup-node@v4
-         with:
-           node-version: ${{ matrix.node-version }}
-           registry-url: 'https://registry.npmjs.org'
-           cache: 'npm'
-       - name: Install dependencies
-         run: |
-           npm install
-           npm run build
-       - name: Install playwright browsers
-         run: |
-           npm playwright install chromium --with-deps
-           npm playwright install firefox --with-deps
-           npm playwright install webkit --with-deps
-           npm exec playwright install
-       - name: Run tests
-         run: npm test:coverage && npm test:e2e
-       - name: Upload coverage reports to Codecov
-         uses: codecov/codecov-action@v4
-         with:
-          token: ${{secrets.CODECOV_TOKEN}}
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.7.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm run build
+
+      - name: Install Playwright Browsers
+        run: |
+          npx playwright install chromium --with-deps
+          npx playwright install firefox --with-deps
+          npx playwright install webkit --with-deps
+
+      - name: Run tests
+        run: npm run test:coverage && npm run test:e2e
+        env:
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+          NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
+          NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
+          NEXT_PUBLIC_FIREBASE_DATABASE_URL: ${{ secrets.NEXT_PUBLIC_FIREBASE_DATABASE_URL }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
