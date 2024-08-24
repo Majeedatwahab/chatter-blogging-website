@@ -29,19 +29,19 @@ jobs:
          with:
            node-version: ${{ matrix.node-version }}
            registry-url: 'https://registry.npmjs.org'
-           cache: 'pnpm'
+           cache: 'npm'
        - name: Install dependencies
          run: |
-           pnpm install
-           pnpm build
+           npm install
+           npm build
        - name: Install playwright browsers
          run: |
-           pnpm playwright install chromium --with-deps
-           pnpm playwright install firefox --with-deps
-           pnpm playwright install webkit --with-deps
-           pnpm exec playwright install
+           npm playwright install chromium --with-deps
+           npm playwright install firefox --with-deps
+           npm playwright install webkit --with-deps
+           npm exec playwright install
        - name: Run tests
-         run: pnpm test:coverage && pnpm test:e2e
+         run: npm test:coverage && npm test:e2e
        - name: Upload coverage reports to Codecov
          uses: codecov/codecov-action@v4
          with:
