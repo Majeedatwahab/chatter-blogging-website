@@ -12,18 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20] 
+        node-version: [20]
     steps:
       - name: Checkout the Repository
         uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9.7.0
-          run_install: |
-            # - recursive: true
-            # args: [--frozen-lockfile, --strict-peer-dependencies]
-
-    
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -32,10 +24,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.7.0
+
       - name: Install dependencies
         run: |
-          npm install
-          npm run build
+          pnpm install
+          pnpm run build
 
       - name: Install Playwright Browsers
         run: |
@@ -43,12 +40,29 @@ jobs:
           npx playwright install firefox --with-deps
           npx playwright install webkit --with-deps
 
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Print Environment Variables
+        run: printenv | grep NEXT_PUBLIC_FIREBASE
+
       - name: Run tests
         run: pnpm test:coverage && pnpm test:e2e
+        env:
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+          NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
+          NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
+          NEXT_PUBLIC_FIREBASE_DATABASE_URL: ${{ secrets.NEXT_PUBLIC_FIREBASE_DATABASE_URL }}
+
+      - name: Deploy to Firebase
+        run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-    
