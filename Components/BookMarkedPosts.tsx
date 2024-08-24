@@ -89,7 +89,8 @@ const BookmarkedPosts: React.FC<BookmarkedPostsProps> = ({ currentUserId }) => {
           </>
         ) : (
           <p className="text-center text-gray-500">
-            You haven't bookmarked any posts yet.
+            You haven&#39;t bookmarked any posts yet.
+
           </p>
         )}
       </div>
