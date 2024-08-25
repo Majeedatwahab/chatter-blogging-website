@@ -27,7 +27,7 @@ const ResetPassword = () => {
           Forgot Password?
         </h1>
         <p className="text-gray-600 mb-6 text-center">
-          Please enter your email address and we&rsquo;ll send you a password
+          Please enter your email address and we will send you a password
           reset link.
         </p>
         <form onSubmit={handleSubmit}>

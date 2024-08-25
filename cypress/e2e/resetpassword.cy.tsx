@@ -7,7 +7,7 @@ describe("ResetPassword Page", () => {
     cy.get("h1").should("contain.text", "Forgot Password?");
     cy.get("p").should(
       "contain.text",
-      "Please enter your email address and we'll send you a password reset link."
+      "Please enter your email address and we will send you a password reset link."
     );
     cy.get('input[type="email"]').should("be.visible");
     cy.get('button[data-testid="reset-password-button"]').should("be.visible");
