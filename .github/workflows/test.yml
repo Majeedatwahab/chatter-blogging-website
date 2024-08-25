@@ -46,6 +46,10 @@ jobs:
           npm install
           npm run build
 
+      - name: Start Application Server
+        run: |
+          npm start &
+
       - name: Install Cypress
         run: |
           npm install -D cypress
