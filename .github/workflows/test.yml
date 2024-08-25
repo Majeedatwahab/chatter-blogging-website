@@ -46,12 +46,16 @@ jobs:
           npm install
           npm run build
 
-      - name: Install playwright browsers
+      - name: Install Playwright
         run: |
-          npm playwright install chromium --with-deps
-          npm playwright install firefox --with-deps
-          npm playwright install webkit --with-deps
-          npm exec playwright install
+          npm install -D @playwright/test
+
+      - name: Install Playwright browsers
+        run: |
+          npx playwright install --with-deps
+          
+          
+
 
       - name: Run tests
         run: npm test:coverage && npm test:e2e
