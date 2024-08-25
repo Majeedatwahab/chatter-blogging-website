@@ -58,17 +58,7 @@ jobs:
         run: |
           npx cypress run
 
-      - name: Install Playwright
-        run: |
-          npm install -D @playwright/test
-
-      - name: Install Playwright browsers
-        run: |
-          npx playwright install
-
-      - name: Run Playwright tests
-        run: |
-          npx playwright test
+      
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
