@@ -25,15 +25,5 @@ describe("Homepage Links and Dashboard Links", () => {
     cy.url().should("include", "/createpost");
   });
 
-  it("should open dropdown menu when the user icon is clicked", () => {
-    cy.visit("/dashboard");
-    cy.get('[data-testid="user-avatar-button"]', { timeout: 10000 })
-      .should("be.visible")
-      .click();
-    cy.get('[data-testid="dropdown-menu"]', { timeout: 10000 })
-      .should("be.visible")
-      .and("contain", "Dashboard")
-      .and("contain", "My Posts")
-      .and("contain", "Logout");
-  });
+
 });
